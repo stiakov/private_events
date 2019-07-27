@@ -1,0 +1,16 @@
+<h1>Users#new</h1>
+<%= form_for(:user, url: users_create_path) do |f| %>
+<%# <%= render 'shared/errors', object: f.object %> 
+
+  <%= f.label :name %>:
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :username %>:
+  <%= f.text_field :username %>
+  <br>
+  <%= f.label :email %>:
+  <%= f.email_field :email %>
+  <br>
+
+  <%= f.submit 'Register' %>
+<% end %>
