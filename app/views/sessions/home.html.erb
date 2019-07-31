@@ -4,11 +4,11 @@
   <p>Discover your next experience on Rails-Brite.</p>
 
   <% if current_user.nil?%>
-    <button class="btn btn-lg btn-outline-info ml-auto mr-auto">
+    <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
       <%= link_to 'Sign up now!', users_new_path %>
     </button>
     <%else%>
-    <button class="btn btn-lg btn-outline-info ml-auto mr-auto">
+    <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
       <%= link_to 'Create a new event!', events_new_path %>
     </button>
   <%end%>
