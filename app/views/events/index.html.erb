@@ -1,0 +1,16 @@
+<h1>All Events</h1>
+
+<div>
+  <% @all_events.each do |i|%>
+    <div>
+      <h2><%= i.title %></h2>
+      <p><%= i.description %></p>
+      <ul>
+        <li><%= i.place %></li>
+        <li><%= i.date_event %></li>
+      </ul>
+      <p>Created by: <%= i.creator.name %></p>
+    </div>
+    <br>
+  <%end%>
+</div>

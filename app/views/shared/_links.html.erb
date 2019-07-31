@@ -1,7 +1,9 @@
-<%=link_to "Home", root_path%>  ||  
-<%= link_to 'Users', index_path%>  ||
+<%= link_to "Home", root_path%>  ||
+<%= link_to 'Events', events_index_path%>  ||
 <% if current_user.nil?%>
   <%= link_to 'Log in', login_path%>  ||
 <%else%>
+  <%= link_to 'My Events', myevents_path %>  ||
+  <%= link_to 'New Event', events_new_path %> ||
   <%= link_to 'Logout', logout_path, method: :delete%>
 <%end%>
