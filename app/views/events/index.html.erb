@@ -1,15 +1,15 @@
-<h1>All Events</h1>
+<% provide(:title, "All Events") %>
 
 <div>
   <% @all_events.each do |i|%>
-    <div>
-      <h2><%= i.title %></h2>
-      <p><%= i.description %></p>
+    <div class="card mb-3 ml-4 mr-4">
+      <p class="card-header text-uppercase"><%= i.title %></p>
+      <p class="card-body text-capitalize"><%= i.description %></p>
       <ul>
         <li><%= i.place %></li>
         <li><%= i.date_event %></li>
       </ul>
-      <p>Created by: <%= i.creator.name %></p>
+      <p class="font-weight-bold ml-4">Created by: <%= i.creator.name %></p>
     </div>
     <br>
   <%end%>

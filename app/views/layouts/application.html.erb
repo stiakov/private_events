@@ -18,6 +18,8 @@
         <div class="d-flex col-4 justify-content-end"><%=render 'shared/links'%></div>
       </div>
 
+    <h3><title class="card mb-3 mt-4 pl-2"><%= full_title(yield(:title)) %></title>
+    </h3>
     <%= yield %>
   </body>
 </html>

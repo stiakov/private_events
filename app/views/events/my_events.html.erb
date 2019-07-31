@@ -1,10 +1,10 @@
-<h1>My Events</h1>
+<% provide(:title, "My Events") %>
 
 <div>
   <% @my_events.each do |i|%>
-    <div>
-      <h3><%= i.title %></h3>
-      <p><%= i.description %></p>
+    <div class="card mb-3 ml-4 mr-4">
+      <p class="card-header text-uppercase"><%= i.title %></p>
+      <p class="card-body text-capitalize"><%= i.description %></p>
       <ul>
         <li><%= i.place %></li>
         <li><%= i.date_event %></li>
