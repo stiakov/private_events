@@ -3,7 +3,7 @@
 <div>
   <% @all_events.each do |i|%>
     <div class="card mb-3 ml-4 mr-4">
-      <p class="card-header text-uppercase"><%= i.title %></p>
+      <p class="card-header text-uppercase"><%= link_to "#{i.title}", myevents_path %></p>
       <p class="card-body text-capitalize"><%= i.description %></p>
       <ul>
         <li><%= i.place %></li>
