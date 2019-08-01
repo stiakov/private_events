@@ -8,7 +8,7 @@
         <li><%= @event.date_event %></li>
       </ul> 
       <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-        <%= link_to 'Attend this event', attendances_create_path(attendee: current_user.id, attended_event: @event.id), method: :post  %>
+        <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post  %>
       </button>
     </div>
 </div>
