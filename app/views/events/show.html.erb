@@ -6,9 +6,18 @@
       <ul>
         <li><%= @event.place %></li>
         <li><%= @event.date_event %></li>
-      </ul> 
+      </ul>
       <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
         <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post  %>
       </button>
+      <br>
+      <br>
+      <h3>ATTENDEES</h3>
+      <br>
+      <ul>
+        <% @event.attendees.each do |u| %>
+         <li><%= u.name %></li>
+        <% end %>
+      </ul>
     </div>
 </div>

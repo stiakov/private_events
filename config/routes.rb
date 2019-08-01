@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   get 'users/new'
   post 'users/create'
-  get 'index', to: 'users#show'
+  get 'users/show'
+  get 'index', to: 'users#index'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'

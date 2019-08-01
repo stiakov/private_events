@@ -1,0 +1,8 @@
+<% provide(:title, "Users index") %>
+<div class="card mb-3 ml-3 mr-3">
+  <ul>
+    <% @users.each do |i|%>
+      <li><%= i.name %></li>
+    <%end%>
+  </ul>
+</div>

@@ -1,8 +1,14 @@
-<% provide(:title, "User index") %>
+<% provide(:title, "User Profile") %>
 <div class="card mb-3 ml-3 mr-3">
+  <h3><%= @user.name %></h3>
+  <small><%= @user.email %></small>
+  <br>
+  <h4>Events that i'm invited to:</h4>
+  <br>
   <ul>
-    <% @users.each do |i|%>
-        <li><%= i.name %></li>
+    <% @user.events.each do |i|%>
+        <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+        <br>
     <%end%>
   </ul>
 </div>
