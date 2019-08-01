@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
     if @event.save
       flash[:success] = 'Event Created'
-      redirect_to events_show_path
+      redirect_to events_index_path
     else
       flash[:warning] = 'Check your inputs'
       render 'new'
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = current_user.events.last
+    @event = Event.find_by_id(params[:id])
   end
 
   def index

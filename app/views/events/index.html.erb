@@ -1,16 +1,16 @@
 <% provide(:title, "All Events") %>
 
 <div>
-  <% @all_events.each do |i|%>
+  <% @all_events.each do |event|%>
     <div class="card mb-3 ml-4 mr-4">
-      <p class="card-header text-uppercase"><%= link_to "#{i.title}", myevents_path %></p>
-      <p class="card-body text-capitalize"><%= i.description %></p>
+      <%# < class="card-header text-uppercase"><%= link_to "#{event.title}", "/events/show/#{event.id}" %>
+      <p class="card-header text-uppercase"><%= link_to "#{event.title}", events_show_path(id: event.id) %></p>
+      <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
       <ul>
-        <li><%= i.place %></li>
-        <li><%= i.date_event %></li>
+        <li><%= event.place %></li>
+        <li><%= event.date_event %></li>
       </ul>
-      <p class="font-weight-bold ml-4">Created by: <%= i.creator.name %></p>
+      <p class="font-weight-bold ml-4">Created by: <%= event.creator.name %></p>
     </div>
-    <br>
   <%end%>
 </div>
