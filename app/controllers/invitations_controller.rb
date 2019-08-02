@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   def new
+    @users = User.all
     if current_user.nil?
       flash[:danger]="You have to login to invite someone to an event!"
       redirect_to login_path
