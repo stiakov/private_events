@@ -1,9 +1,8 @@
 <% provide(:title, "All Events") %>
-
+<h3 class="text-center">Upcoming events</h3>
 <div>
-  <% @all_events.each do |event|%>
-    <div class="card mb-3 ml-4 mr-4">
-      <%# < class="card-header text-uppercase"><%= link_to "#{event.title}", "/events/show/#{event.id}" %>
+  <% @all_events.upcoming_event.each do |event|%>
+    <div class="card mb-3 ml-4 mr-4 mt-4">
       <p class="card-header text-uppercase"><%= link_to "#{event.title}", events_show_path(id: event.id) %></p>
       <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
       <ul>
@@ -14,3 +13,19 @@
     </div>
   <%end%>
 </div>
+<br>
+<h3 class="text-center">Past events</h3>
+<div>
+  <% @all_events.past_event.each do |event|%>
+    <div class="card mb-3 ml-4 mr-4 mt-4">
+      <p class="card-header text-uppercase"><%= link_to "#{event.title}", events_show_path(id: event.id) %></p>
+      <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
+      <ul>
+        <li><%= event.place %></li>
+        <li><%= event.date_event %></li>
+      </ul>
+      <p class="font-weight-bold ml-4">Created by: <%= event.creator.name %></p>
+    </div>
+  <%end%>
+</div>
+

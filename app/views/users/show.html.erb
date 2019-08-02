@@ -1,14 +1,28 @@
 <% provide(:title, "User Profile") %>
-<div class="card mb-3 ml-3 mr-3">
-  <h3><%= @user.name %></h3>
-  <small><%= @user.email %></small>
-  <br>
-  <h4>Events that i'm invited to:</h4>
-  <br>
-  <ul>
-    <% @user.events.each do |i|%>
-        <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
-        <br>
-    <%end%>
-  </ul>
-</div>
+  <div class="ml-2 mb-0">
+    <h3><%= @user.name %></h3>
+    <small><%= @user.email %></small>
+  </div>
+
+  <div class="card mb-3 ml-3 mr-3 mt-3">
+    <h4 class="card-header">Events that I was invited to:</h4>
+    <div class="card-body">
+      <ul>
+        <% @user.events.past_event.each do |i|%>
+            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+            <br>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+  <div class="card mb-3 ml-3 mr-3">
+    <h4 class="card-header">Events that I'm invited to:</h4>
+    <div class="card-body">
+      <ul>
+        <% @user.events.upcoming_event.each do |i|%>
+            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+            <br>
+        <%end%>
+      </ul>
+    </div>
+  </div>
