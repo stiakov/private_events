@@ -8,9 +8,10 @@
 
   <div class="form-group ml-4 mr-4">
     <%= f.label 'Select your guests:' %>
-      <%# <% @users.each do |user| %> 
-        <%# <%= f.check_box_tag 'name[]', user.name, class:'form-control' %>
-      <%# <% end %> 
+    <% @users.each do |user| %> 
+      <%= f.check_box :user, :value => "#{user.name}", class:'form-control' %>
+      <%# f.check_box :public, {}, "true", "false" %>
+    <% end %>
   </div>
 
 <%= f.submit 'Invite', class:'ml-4 mr-4 btn btn-primary' %>
