@@ -1,18 +1,18 @@
 <% provide(:title, "Invite") %>
 
-<%= form_for(:invitation, url: invite_path) do |f| %>
+<%= form_for(:invitation, url: invite_create_path, method: :post) do |f| %>
   <div class="form-group ml-4 mr-4">
-    <%= f.label 'Select an event to invite someone to:' %><br>
-    <%= f.select 'title', options_for_select(current_user.events.collect{ |i| [i.title] }, class: 'form-control') %>
+    <h5>Select an event to invite someone to:</h5>
+    <%= f.select :invited_event_id, options_for_select(current_user.events.collect{ |i| [i.id]}, class: 'form-control') %>
   </div>
 
   <div class="form-group ml-4 mr-4">
-    <%= f.label 'Select your guests:' %><br>
-    <% @users.each do |user| %> 
-      <%= f.label user.name %>
-      <%= f.check_box :user, :value => user.id, class:'form-control' %> 
-      <%# <%= f.hidden_field :original_number, :value => params[:original_number] %>
-      <%# f.check_box :public, {}, "true", "false" %>
+    <h5>Select your guests:</h5>
+    <%= f.collection_check_boxes :guest_id, User.all, :id, :name do |b| %>
+      <div class="collection-check-box">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
     <% end %>
   </div>
 

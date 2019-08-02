@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   get 'invitations/new'
   get 'invite', to: 'invitations#new'
-  post 'invite/create'
+  post 'invite/create', to: 'invitations#create'
+
   get 'events/new'
   post 'events/create'
   match '/events/show/:id', to: 'events#show', via: :get, as: :events_show
   get 'events/index'
   get 'myevents', to: 'events#my_events'
+
   post 'attendances/create'
 
   root 'sessions#home'

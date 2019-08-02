@@ -7,9 +7,17 @@
         <li><%= @event.place %></li>
         <li><%= @event.date_event %></li>
       </ul>
-      <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-        <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post  %>
-      </button>
+
+      <% if current_user.id == guest.id%>
+        <button class="btn btn-lg btn-outline-danger ml-auto mr-auto">
+          <%= link_to 'Don\'t attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete  %>
+        </button>
+      <%else %>
+        <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
+          <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post  %>
+        </button>
+      <%end %>
+
       <br>
       <br>
       <h3>ATTENDEES</h3>
