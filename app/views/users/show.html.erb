@@ -4,7 +4,7 @@
     <small><%= @user.email %></small>
   </div>
 
-  <% if current_user.invited_events.nil?%>
+  <% if !current_user.invitations.nil?%>
   <div class="card mb-3 ml-3 mr-3 mt-3">
     <h4 class="card-header">Pending invitations:</h4>
     <div class="card-body">
