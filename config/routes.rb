@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'myevents', to: 'events#my_events'
 
   post 'attendances/create'
+  delete 'attendances/destroy'
 
   root 'sessions#home'
 

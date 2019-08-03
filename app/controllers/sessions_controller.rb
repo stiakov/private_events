@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @session = User.find_by(params[:email])
+    @session = User.find_by_email(params[:sessions][:email])
     if !@session.nil?
       log_in @session
       redirect_to index_path

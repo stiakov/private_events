@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
+      asist = current_user.attendances.build({attended_event_id: @event.id}).save
       flash[:success] = 'Event Created'
       redirect_to events_index_path
     else

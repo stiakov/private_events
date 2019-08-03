@@ -18,7 +18,6 @@ class InvitationsController < ApplicationController
     guests.each do |i|
       @invitation = Invitation.new(guest_id: i.to_i, invited_event_id: invitation_params[:invited_event_id].to_i)
       counter += 1 if @invitation.save
-    byebug
     end
 
     if counter == guests.size

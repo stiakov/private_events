@@ -12,5 +12,7 @@ module SessionsHelper
   
   def log_out
     reset_session
+    current_user = nil
+    @session = nil
   end
 end

@@ -3,7 +3,17 @@
     <h3><%= @user.name %></h3>
     <small><%= @user.email %></small>
   </div>
-
+  <div class="card mb-3 ml-3 mr-3 mt-3">
+    <h4 class="card-header">Pending invitations:</h4>
+    <div class="card-body">
+      <ul>
+        <% current_user.invited_events.each do |i|%>
+            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+            <br>
+        <%end%>
+      </ul>
+    </div>
+  </div>
   <div class="card mb-3 ml-3 mr-3 mt-3">
     <h4 class="card-header">Events that I was invited to:</h4>
     <div class="card-body">
