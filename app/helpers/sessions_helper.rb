@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
@@ -9,10 +11,8 @@ module SessionsHelper
       @current_user ||= User.find_by(id: session[:user_id])
     end
   end
-  
+
   def log_out
     reset_session
-    current_user = nil
-    @session = nil
   end
 end

@@ -3,12 +3,12 @@
 <%= form_for(:invitation, url: invite_create_path, method: :post) do |f| %>
   <div class="form-group ml-4 mr-4">
     <h5>Select an event to invite someone to:</h5>
-    <%= f.select :invited_event_id, options_for_select(current_user.events.collect{ |i| [i.id]}, class: 'form-control') %>
+    <%= f.select :invited_event_id, options_for_select(current_user.events.collect {|i| [i.id]}, class: 'form-control') %>
   </div>
 
   <div class="form-group ml-4 mr-4">
     <h5>Select your guests:</h5>
-    <%= f.collection_check_boxes :guest_id, User.all, :id, :name do |b| %>
+    <%= f.collection_check_boxes :guest_id, User.all.where.not(id: current_user.id), :id, :name do |b| %>
       <div class="collection-check-box">
         <%= b.check_box %>
         <%= b.label %>
@@ -16,6 +16,5 @@
     <% end %>
   </div>
 
-<%= f.submit 'Invite', class:'ml-4 mr-4 btn btn-primary' %>
-
+  <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
 <% end %>
