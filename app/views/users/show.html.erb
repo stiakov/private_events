@@ -3,6 +3,8 @@
     <h3><%= @user.name %></h3>
     <small><%= @user.email %></small>
   </div>
+
+  <% if current_user.invited_events.nil?%>
   <div class="card mb-3 ml-3 mr-3 mt-3">
     <h4 class="card-header">Pending invitations:</h4>
     <div class="card-body">
@@ -14,6 +16,8 @@
       </ul>
     </div>
   </div>
+<%end%>
+
   <div class="card mb-3 ml-3 mr-3 mt-3">
     <h4 class="card-header">Events that I was invited to:</h4>
     <div class="card-body">
