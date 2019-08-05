@@ -3,7 +3,7 @@
 <%= form_for(:invitation, url: invite_create_path, method: :post) do |f| %>
   <div class="form-group ml-4 mr-4">
     <h5>Select an event to invite someone to:</h5>
-    <%= f.select :invited_event_id, options_for_select(@temp, class: 'form-control') %>
+    <%= f.select :invited_event_id, options_for_select(@events, class: 'form-control') %>
   </div>
 
   <div class="form-group ml-4 mr-4">
