@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     @event = Event.find_by_id(params[:id])
     invited = Invitation.all.where(invited_event_id: params[:id])
     ids = invited.map { |i| i[:guest_id] }
-    ids << current_user.id
+    ids << current_user.id unless current_user.nil?
     @users = User.all.where.not(id: [ids])
   end
 

@@ -7,7 +7,7 @@
         <li><%= @event.place %></li>
         <li><%= @event.date_event %></li>
       </ul>
-      <% if current_user.invitations.find_by(invited_event_id: @event.id) %>
+      <% if !current_user.nil? && current_user.invitations.find_by(invited_event_id: @event.id) %>
         <% if current_user.attendances.find_by(attended_event_id: @event.id) %>
           <button class="btn btn-lg btn-outline-danger ml-auto mr-auto">
             <%= link_to 'Don\'t attend this event', attendances_destroy_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete %>
@@ -27,22 +27,30 @@
         <% end %>
       </ul>
     </div>
-    <div>
-      <h3>SEND INVITATIONS</h3>
-      <%= form_for(:invitation, url: invite_create_path, method: :post, invited_event_id: @event.id,) do |f| %>
-        <div class="form-group ml-4 mr-4">
-          <h5>Select your guests:</h5>
-          <%= f.collection_check_boxes :guest_id, @users, :id, :name do |b| %>
-            <div class="collection-check-box">
-              <%= b.check_box %>
-              <%= b.label %>
-            </div>
-          <% end %>
-        </div>
+    <% if current_user %>
+      <div>
+        <% if current_user.events.find_by(id: @event.id, creator_id: current_user.id) %>
+          <div>
+            <h3>SEND INVITATIONS</h3>
+            <%= form_for(:invitation, url: invite_create_path, method: :post, invited_event_id: @event.id,) do |f| %>
+              <div class="form-group ml-4 mr-4">
+                <h5>Select your guests:</h5>
+                <%= f.collection_check_boxes :guest_id, @users, :id, :name do |b| %>
+                  <div class="collection-check-box">
+                    <%= b.check_box %>
+                    <%= b.label %>
+                  </div>
+                <% end %>
+              </div>
 
-        <%= f.hidden_field :invited_event_id, :value => @event.id %>
-        <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
-      <% end %>
-    </div>
+              <%= f.hidden_field :invited_event_id, :value => @event.id %>
+              <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <%= redirect_to_login %>
+    <% end %>
   </div>
 </div>
