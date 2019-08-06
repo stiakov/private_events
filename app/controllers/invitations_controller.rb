@@ -17,12 +17,10 @@ class InvitationsController < ApplicationController
 
   def create
     counter = 0
-    byebug
     guests = invitation_params[:guest_id].reject(&:blank?)
 
     guests.each do |i|
       found = Invitation.find_by(guest_id: i.to_i, invited_event_id: invitation_params[:invited_event_id].to_i)
-      byebug
       @invitation = Invitation.new(guest_id: i.to_i, invited_event_id: invitation_params[:invited_event_id].to_i) if found.nil?
       counter += 1 if @invitation.save
     end
