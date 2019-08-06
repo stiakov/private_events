@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <div>
-    <h3>ATTENDEES</h3>
+      <h3>ATTENDEES</h3>
       <ul>
         <% @event.attendees.each do |u| %>
           <li><%= u.name %></li>
@@ -29,7 +29,7 @@
     </div>
     <div>
       <h3>SEND INVITATIONS</h3>
-      <%= form_for(:invitation, url: invite_create_path(:guest_id),  method: :post, :invited_event_id => @event.id,) do |f| %>
+      <%= form_for(:invitation, url: invite_create_path, method: :post, invited_event_id: @event.id,) do |f| %>
         <div class="form-group ml-4 mr-4">
           <h5>Select your guests:</h5>
           <%= f.collection_check_boxes :guest_id, @users, :id, :name do |b| %>
@@ -39,6 +39,8 @@
             </div>
           <% end %>
         </div>
+
+        <%= f.hidden_field :invited_event_id, :value => @event.id %>
         <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
       <% end %>
     </div>
