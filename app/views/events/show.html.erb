@@ -1,49 +1,46 @@
-<div class="ml-3 mr-3">
-  <div>
-    <h3><%= @event.title %></h3>
-    <p><%= @event.description %></p>
-    <ul>
-      <li><%= @event.place %></li>
-      <li><%= @event.date_event %></li>
-    </ul>
-
-    <% if current_user.invitations.find_by(invited_event_id: @event.id) %>
-      <% if current_user.attendances.find_by(attended_event_id: @event.id) %>
-        <button class="btn btn-lg btn-outline-danger ml-auto mr-auto">
-          <%= link_to 'Don\'t attend this event', attendances_destroy_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete %>
-        </button>
-      <% else %>
-        <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-          <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post %>
-        </button>
-      <% end %>
-    <% end %>
-
-    <br>
-    <br>
-    <h3>ATTENDEES</h3>
-    <br>
-    <ul>
-      <% @event.attendees.each do |u| %>
-        <li><%= u.name %></li>
-      <% end %>
-    </ul>
-    <br>
-    <br>
-    <h3>SEND INVITATIONS</h3>
-    <br>
-    <%= form_for(:invitation, url: invite_create_path(:guest_id),  method: :post) do |f| %>
-      <div class="form-group ml-4 mr-4">
-        <h5>Select your guests:</h5>
-        <%= f.collection_check_boxes :guest_id, @users, :id, :name do |b| %>
-          <div class="collection-check-box">
-            <%= b.check_box %>
-            <%= b.label %>
-          </div>
+<div class="ml-3 mr-3 container">
+  <div class="row">
+    <div>
+      <h3><%= @event.title %></h3>
+      <p><%= @event.description %></p>
+      <ul>
+        <li><%= @event.place %></li>
+        <li><%= @event.date_event %></li>
+      </ul>
+      <% if current_user.invitations.find_by(invited_event_id: @event.id) %>
+        <% if current_user.attendances.find_by(attended_event_id: @event.id) %>
+          <button class="btn btn-lg btn-outline-danger ml-auto mr-auto">
+            <%= link_to 'Don\'t attend this event', attendances_destroy_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete %>
+          </button>
+        <% else %>
+          <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
+            <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post %>
+          </button>
         <% end %>
-      </div>
-      <%= f.hidden_field :invited_event_id, :value => @event.id %>
-      <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
-    <% end %>
+      <% end %>
+    </div>
+    <div>
+    <h3>ATTENDEES</h3>
+      <ul>
+        <% @event.attendees.each do |u| %>
+          <li><%= u.name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div>
+      <h3>SEND INVITATIONS</h3>
+      <%= form_for(:invitation, url: invite_create_path(:guest_id),  method: :post, :invited_event_id => @event.id,) do |f| %>
+        <div class="form-group ml-4 mr-4">
+          <h5>Select your guests:</h5>
+          <%= f.collection_check_boxes :guest_id, @users, :id, :name do |b| %>
+            <div class="collection-check-box">
+              <%= b.check_box %>
+              <%= b.label %>
+            </div>
+          <% end %>
+        </div>
+        <%= f.submit 'Invite', class: 'ml-4 mr-4 btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>
