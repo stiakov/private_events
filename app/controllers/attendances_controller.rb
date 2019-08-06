@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
   def destroy
     @attendance = current_user.attendances.find_by(attended_event_id: params[:attended_event_id])
     flash[:success]="Attendance cancelled" if @attendance.delete 
-    redirect_to root_path
+    redirect_to events_index_path
   end
 
   private
