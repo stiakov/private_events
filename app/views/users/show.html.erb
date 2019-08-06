@@ -32,7 +32,7 @@
   </div>
 
   <div class="card mb-3 ml-3 mr-3 mt-3">
-    <h4 class="card-header">Events that I was invited to:</h4>
+    <h4 class="card-header">My Past Events:</h4>
     <div class="card-body">
       <ul>
         <% @user.events.past_event.each do |i|%>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="card mb-3 ml-3 mr-3">
-    <h4 class="card-header">Events that I'm invited to:</h4>
+    <h4 class="card-header">My upcoming events:</h4>
     <div class="card-body">
       <ul>
         <% @user.events.upcoming_event.each do |i|%>
