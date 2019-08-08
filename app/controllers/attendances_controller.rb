@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
     if @attendance.save
       event = Event.find_by_id(params[:attended_event_id])
       flash[:success] = "You are scheduled for #{event.title.upcase}"
-      redirect_to events_index_path
+      redirect_to events_path
     else
       flash[:danger] = 'Beeep!'
       redirect_to events_show_path
@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
   def destroy
     @attendance = current_user.attendances.find_by(attended_event_id: params[:attended_event_id])
     flash[:success]="Attendance cancelled" if @attendance.delete 
-    redirect_to events_index_path
+    redirect_to events_path
   end
 
   private

@@ -1,6 +1,6 @@
 <% provide(:title, "New Event") %>
 
-<%= form_for(:event, url: events_create_path) do |f| %>
+<%= form_for(:event, url: events_path) do |f| %>
   <div class="form-group ml-4 mr-4">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>

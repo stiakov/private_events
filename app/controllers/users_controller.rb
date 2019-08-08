@@ -16,6 +16,8 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @upcoming = @user.events.upcoming_event
+    @past = @user.events.past_event
   end
 
   def index

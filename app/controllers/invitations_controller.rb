@@ -14,7 +14,7 @@ class InvitationsController < ApplicationController
 
     if guests.size > 0 && counter == guests.size
       flash[:success] = 'Invitations sent!'
-      redirect_to users_show_path
+      redirect_to user_path
     else
       flash[:danger] = 'You have to select a guest, please check'
       redirect_to myevents_path

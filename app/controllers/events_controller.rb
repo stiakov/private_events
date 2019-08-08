@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     if @event.save
       current_user.attendances.build( { attended_event_id: @event.id } ).save
       flash[:success] = 'Event Created'
-      redirect_to events_index_path
+      redirect_to events_path
     else
       flash[:warning] = 'Check your inputs'
       render 'new'

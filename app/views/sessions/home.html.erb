@@ -5,11 +5,11 @@
 
   <% if current_user.nil?%>
     <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-      <%= link_to 'Sign up now!', users_new_path %>
+      <%= link_to 'Sign up now!', new_user_path %>
     </button>
     <%else%>
     <button class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-      <%= link_to 'Create a new event!', events_new_path %>
+      <%= link_to 'Create a new event!', new_event_path %>
     </button>
   <%end%>
 </div>

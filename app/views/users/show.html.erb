@@ -10,7 +10,6 @@
     <div class="card-body">
       <ul>
         <% current_user.invited_events.each do |i|%>
-        <%# <% current_user.invited_events_ids.uniq each do |i|%> 
             <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
             <br>
         <%end%>
@@ -35,7 +34,7 @@
     <h4 class="card-header">My Past Events:</h4>
     <div class="card-body">
       <ul>
-        <% @user.events.past_event.each do |i|%>
+        <% @past.each do |i|%>
             <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
             <br>
         <%end%>
@@ -46,8 +45,8 @@
     <h4 class="card-header">My upcoming events:</h4>
     <div class="card-body">
       <ul>
-        <% @user.events.upcoming_event.each do |i|%>
-            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+        <% @upcoming.each do |event|%>
+            <li><%= link_to "#{event.title} – #{event.date_event}", events_show_path(id: event.id) %></li>
             <br>
         <%end%>
       </ul>
