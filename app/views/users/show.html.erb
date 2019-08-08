@@ -1,54 +1,70 @@
 <% provide(:title, "User Profile") %>
-  <div class="ml-3 mb-0">
-    <h3><%= @user.name %></h3>
-    <small><%= @user.email %></small>
-  </div>
+<div class="ml-3 mb-0">
+  <h3><%= @user.name %></h3>
+  <small><%= @user.email %></small>
+</div>
 
-  <% if !current_user.invitations.nil?%>
-  <div class="card mb-3 ml-3 mr-3 mt-3">
-    <h4 class="card-header">Pending invitations:</h4>
-    <div class="card-body">
-      <ul>
-        <% current_user.invited_events.each do |i|%>
-            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
-            <br>
-        <%end%>
-      </ul>
-    </div>
+<% if !current_user.invitations.empty?%>
+<div class="card mb-3 ml-3 mr-3 mt-3">
+  <h4 class="card-header">Pending invitations:</h4>
+  <div class="card-body">
+    <ul>
+      <% current_user.invited_events.each do |i|%>
+          <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+          <br>
+      <%end%>
+    </ul>
   </div>
+</div>
+<%else%>
+  <p class="text-center">You have no invitations right now</p>
 <%end%>
-  <div class="card mb-3 ml-3 mr-3">
-    <h4 class="card-header">Events that I'm attending:</h4>
-    <div class="card-body">
-      <ul>
-        <% @user.attendances.each do |i|%>
-            <% b = Event.find_by_id(i.attended_event_id)%>
-            <li><%= link_to "#{b.title} – #{b.date_event}", events_show_path(id: b.id) %></li>
-            <br>
-        <%end%>
-      </ul>
-    </div>
-  </div>
 
-  <div class="card mb-3 ml-3 mr-3 mt-3">
-    <h4 class="card-header">My Past Events:</h4>
-    <div class="card-body">
-      <ul>
-        <% @past.each do |i|%>
-            <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
-            <br>
-        <%end%>
-      </ul>
-    </div>
+<div class="card mb-3 ml-3 mr-3">
+  <h4 class="card-header">Events that I'm attending:</h4>
+  <div class="card-body">
+    <ul>
+    <% if !@user.attendances.empty?%>
+      <% @user.attendances.each do |i|%>
+          <% b = Event.find_by_id(i.attended_event_id)%>
+          <li><%= link_to "#{b.title} – #{b.date_event}", events_show_path(id: b.id) %></li>
+          <br>
+      <%end%>
+    <%else%>
+      <p class="text-center">You are not attending any events</p>
+    <%end%>
+    </ul>
   </div>
-  <div class="card mb-3 ml-3 mr-3">
-    <h4 class="card-header">My upcoming events:</h4>
-    <div class="card-body">
+</div>
+
+<div class="card mb-3 ml-3 mr-3 mt-3">
+  <h4 class="card-header">My Past Events:</h4>
+  <div class="card-body">
+    <% if @past.empty?%>
+      <p class="text-center">You have no past events</p>
+    <%else%>
       <ul>
-        <% @upcoming.each do |event|%>
-            <li><%= link_to "#{event.title} – #{event.date_event}", events_show_path(id: event.id) %></li>
-            <br>
-        <%end%>
+      <% @past.each do |i|%>
+        <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+        <br>
+      <%end%>
       </ul>
-    </div>
+    <%end%>
   </div>
+</div>
+
+<div class="card mb-3 ml-3 mr-3">
+  <h4 class="card-header">My upcoming events:</h4>
+  <div class="card-body">
+    <%if @upcoming.empty?%>
+      <p class="text-center">You have no upcoming events</p>
+    <%else%>
+      <ul>
+      <% @upcoming.each do |event|%>
+        <li><%= link_to "#{event.title} – #{event.date_event}", events_show_path(id: event.id) %></li>
+        <br>
+      <%end%>
+      </ul>
+    <%end%>
+  </div>
+</div>
