@@ -24,11 +24,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    if current_user.nil?
-      @all_events = Event.all
-    else
-      @all_events = Event.all.where.not(creator_id: current_user.id)
-    end
+    @all_events = Event.all
   end
 
   def my_events
