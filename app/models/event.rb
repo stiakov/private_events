@@ -9,8 +9,7 @@ class Event < ApplicationRecord
   validates :place, presence: :true, length: { minimum: 5 }
   validates :description, presence: :true, length: { minimum: 10 }
 
-  default_scope -> { order(date_event: :asc) }
-  scope :past_event, -> {where('date_event < ?',  Time.current) }
-  scope :upcoming_event, -> {where('date_event >= ?', Time.current) }
+  scope :past_event, -> { where('date_event < ?',  Time.current).order(date_event: :DESC) }
+  scope :upcoming_event, -> { where('date_event >= ?', Time.current) }
 
 end
