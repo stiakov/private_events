@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @user_upcoming_attendances = @user.attended_events.where('date_event >= ?', Date.current)
-    @user_past_attendances = @user.attended_events.where('date_event < ?', Date.current)
+    @user_upcoming_attendances = @user.attended_events.present_and_future
+    @user_past_attendances = @user.attended_events.past_gone
   end
 
   def index
