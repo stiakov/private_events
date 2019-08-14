@@ -1,48 +1,62 @@
-
 <% provide(:title, "All Events") %>
-<% if @all_events.empty?%>
-  <p class="text-center">No events to display</p>  
-<%else%>
-  <h3 class="text-center">Upcoming events</h3>
-  <div>
-    <% if @all_events.upcoming_event.empty? %>
-      <p class="text-center">No events to display</p>
-    <%else%>
-      <% @all_events.upcoming_event.each do |event|%>
-        <div class="card mb-3 ml-4 mr-4 mt-4">
-          <p class="card-header text-uppercase d-flex justify-content-between"><%= link_to "#{event.title}", events_show_path(id: event.id) %>
-          <% if event.date_event.to_date == Time.current.to_date%>
-            <span class="text-danger font-weight-bold">TODAY</span>
-          <%end%>
-          </p>
-          <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
-          <ul>
-            <li><%= event.place %></li>
-            <li><%= event.date_event %></li>
-          </ul>
-          <p class="font-weight-bold ml-4">Created by: <%= event.creator.name %></p>
-        </div>
-      <%end%>
-    <%end%>
-  </div>
-  <br>
 
-  <h3 class="text-center">Past events</h3>
-  <div>
-    <%if @all_events.past_event.empty? %>
-      <p class="text-center">No events to display</p>
-    <%else%>
-      <% @all_events.past_event.each do |event|%>
-        <div class="card mb-3 ml-4 mr-4 mt-4">
-          <p class="card-header text-uppercase"><%= link_to "#{event.title}", events_show_path(id: event.id) %></p>
-          <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
-          <ul>
-            <li><%= event.place %></li>
-            <li><%= event.date_event %></li>
-          </ul>
-          <p class="font-weight-bold ml-4">Created by: <%= event.creator.name %></p>
-        </div>
-      <%end%>
-    <%end%>
-  </div>
-<%end%>
+<h3 class="text-center">Upcoming events</h3>
+<div>
+  <% if @upcoming_events.empty? %>
+    <p class="text-center">No events to display</p>
+  <% else %>
+    <% @upcoming_events.each do |event| %>
+      <div class="card mb-3 ml-4 mr-4 mt-4">
+        <p class="card-header text-uppercase d-flex justify-content-between"><%= link_to "#{event.title}", events_show_path(id: event.id) %>
+          <% if event.date_event.to_date == Time.current.to_date %>
+            <span class="text-danger font-weight-bold">TODAY</span>
+          <% end %>
+        </p>
+        <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
+        <ul class="ml-4 list-unstyled">
+          <li>Place: <%= event.place %></li>
+          <% date_hour = event.date_event.to_s.split(' ') %>
+          <li><%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %></li>
+        </ul>
+        <p class="ml-4 font-weight-bold">
+          <% if event.creator_id == current_user.id %>
+            Hosted by me
+          <% else %>
+            Created by: <%= event.creator.name %>
+          <% end %>
+          <span class="text-capitalize text-info font-weight-light"> / <%= time_ago_in_words(event.date_event) %>
+            hence</span>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<br>
+
+<h3 class="text-center">Past events</h3>
+<div>
+  <% if @past_events.empty? %>
+    <p class="text-center">No events to display</p>
+  <% else %>
+    <% @past_events.each do |event| %>
+      <div class="card mb-3 ml-4 mr-4 mt-4">
+        <p class="card-header text-uppercase"><%= link_to "#{event.title}", events_show_path(id: event.id) %></p>
+        <p class="card-body text-capitalize mb-0 pb-2"><%= event.description %></p>
+        <ul class="ml-4 list-unstyled">
+          <li>Place: <%= event.place %></li>
+          <% date_hour = event.date_event.to_s.split(' ') %>
+          <li><%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %></li>
+        </ul>
+        <p class="ml-4 font-weight-bold">
+          <% if event.creator_id == current_user.id %>
+            Hosted by me
+          <% else %>
+            Created by: <%= event.creator.name %>
+          <% end %>
+          <span class="text-capitalize text-info font-weight-light"> / <%= time_ago_in_words(event.date_event) %>
+            ago</span>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
