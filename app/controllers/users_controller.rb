@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     @user = current_user
     @user_upcoming_attendances = @user.attended_events.present_and_future
     @user_past_attendances = @user.attended_events.past_gone
+    @user_pending_inv = @user.invitations.all.where(acceptance: nil)
+    @user_pending_inv = @user_pending_inv.reject {|i| i.invited_event.date_event <= Time.current }
   end
 
   def index
