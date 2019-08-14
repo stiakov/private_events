@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
-      current_user.attendances.build( { attended_event_id: @event.id } ).save
+      current_user.attendances.build( attended_event_id: @event.id ).save
       flash[:success] = 'Event Created'
       redirect_to events_path
     else
@@ -24,7 +24,8 @@ class EventsController < ApplicationController
   end
 
   def index
-    @all_events = Event.all
+    @upcoming_events = Event.all.upcoming_event
+    @past_events = Event.all.past_event
   end
 
   private
