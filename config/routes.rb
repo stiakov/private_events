@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create show]
   get 'index', to: 'users#index'
 
-  resources :events, only: %i[new create index my_events]
+  resources :events, only: %i[new create index]
   match '/events/show/:id', to: 'events#show', via: :get, as: :events_show
-  get 'myevents', to: 'events#my_events'
 
   post 'attendances/create'
   delete 'attendances/destroy'

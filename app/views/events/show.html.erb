@@ -7,6 +7,8 @@
         <li><%= @event.place %></li>
         <li><%= @event.date_event %></li>
       </ul>
+      <p>Hosted by: <%= @event.creator.name %></p>
+      <br>
       <% if !current_user.nil? && current_user.invitations.find_by(invited_event_id: @event.id) %>
         <% if current_user.attendances.find_by(attended_event_id: @event.id) %>
           <button class="btn btn-lg btn-outline-danger ml-auto mr-auto mb-2">

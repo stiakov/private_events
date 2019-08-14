@@ -9,9 +9,19 @@
   <h4 class="card-header">Pending invitations:</h4>
   <div class="card-body">
     <ul>
-      <% current_user.invited_events.each do |i|%>
-          <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
-          <br>
+      <% current_user.invited_events.each do |event|%>
+        <li><%= link_to "#{event.title}", events_show_path(id: event.id) %>
+          <% if event.creator_id == @current_user.id%>
+            <span class="text-danger font-weight-bold">*</span>
+          <% else %>
+            <br>
+            <span class="text-success">Hosted by: <%= event.creator.name %></span>
+          <% end %>
+        </li>
+        <% date_hour = event.date_event.to_s.split(' ') %>
+        <small class="text-success font-weight-bold"><%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %> </small>
+        <br>
+        <br>
       <%end%>
     </ul>
   </div>
@@ -21,47 +31,53 @@
 <%end%>
 
 <div class="card mb-3 ml-3 mr-3">
-  <h4 class="card-header">Events that I'm attending:</h4>
+  <h4 class="card-header d-flex justify-content-between">Events that I'm attending:
+    <small class="text-danger">Events marked with * are owned by you</small>
+  </h4>
   <div class="card-body">
     <ul>
-    <% if !@user.attendances.empty?%>
-      <% @user.attendances.each do |i|%>
-          <% b = Event.find_by_id(i.attended_event_id)%>
-          <li><%= link_to "#{b.title} – #{b.date_event}", events_show_path(id: b.id) %></li>
-          <br>
+    <% if !@user_upcoming_attendances.empty?%>
+      <% @user_upcoming_attendances.each do |event|%>
+        <li><%= link_to "#{event.title} ", events_show_path(id: event.id) %>
+          <% if event.creator_id == @current_user.id%>
+            <span class="text-danger font-weight-bold">*</span>
+          <% else %>
+            <br>
+            <span class="text-success">Hosted by: <%= event.creator.name %></span>
+          <% end %>
+        </li>
+          <% date_hour = event.date_event.to_s.split(' ') %>
+          <small class="text-success font-weight-bold"><%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %> </small>
+        <br>
+        <br>
       <%end%>
     <%else%>
       <p class="text-center">You are not attending any events</p>
     <%end%>
     </ul>
+
   </div>
 </div>
 
 <div class="card mb-3 ml-3 mr-3 mt-3">
-  <h4 class="card-header">My Past Events:</h4>
+  <h4 class="card-header">My Attended Events:</h4>
   <div class="card-body">
-    <% if @past.empty?%>
+    <% if @user_past_attendances.empty?%>
       <p class="text-center">You have no past events</p>
     <%else%>
       <ul>
-      <% @past.each do |i|%>
-        <li><%= link_to "#{i.title} – #{i.date_event}", events_show_path(id: i.id) %></li>
+      <% @user_past_attendances.each do |event|%>
+        <li><%= link_to "#{event.title}", events_show_path(id: event.id) %>
+          <% if event.creator_id == @current_user.id%>
+            <span class="text-danger font-weight-bold">*</span>
+          <% else %>
+            <br>
+            <span class="text-success">Hosted by: <%= event.creator.name %></span>
+          <%end%>
+        </li>
+        <% date_hour = event.date_event.to_s.split(' ') %>
+        <small class="text-success font-weight-bold"><%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %> </small>
         <br>
-      <%end%>
-      </ul>
-    <%end%>
-  </div>
-</div>
-
-<div class="card mb-3 ml-3 mr-3">
-  <h4 class="card-header">My upcoming events:</h4>
-  <div class="card-body">
-    <%if @upcoming.empty?%>
-      <p class="text-center">You have no upcoming events</p>
-    <%else%>
-      <ul>
-      <% @upcoming.each do |event|%>
-        <li><%= link_to "#{event.title} – #{event.date_event}", events_show_path(id: event.id) %></li>
         <br>
       <%end%>
       </ul>
