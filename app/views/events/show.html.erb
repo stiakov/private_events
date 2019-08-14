@@ -9,17 +9,16 @@
       </ul>
       <p>Hosted by: <%= @event.creator.name %></p>
       <br>
+      <div class="d-flex justify-content-between">
       <% if !current_user.nil? && current_user.invitations.find_by(invited_event_id: @event.id) %>
-        <% if current_user.attendances.find_by(attended_event_id: @event.id) %>
-          <button class="btn btn-lg btn-outline-danger ml-auto mr-auto mb-2">
-            <%= link_to 'Don\'t attend this event', attendances_destroy_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete %>
+          <button class="col-5 btn btn-sm btn-outline-primary ml-auto mr-auto mb-2">
+            <%= link_to 'Accept', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post %>
           </button>
-        <% else %>
-          <button class="btn btn-lg btn-outline-primary ml-auto mr-auto mb-2">
-            <%= link_to 'Attend this event', attendances_create_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :post %>
+          <button class="col-5 btn btn-sm btn-outline-danger ml-auto mr-auto mb-2">
+            <%= link_to 'Decline', attendances_destroy_path(attendee_id: current_user.id, attended_event_id: @event.id), method: :delete %>
           </button>
-        <% end %>
       <% end %>
+      </div>
     </div>
     <div class="card mb-3 col-3">
     <h4 class="card-header text-capitalize">Attendees</h4>      
