@@ -24,6 +24,6 @@ class InvitationsController < ApplicationController
   private
 
   def invitation_params
-    params.require(:invitation).permit({ guest_id: [] }, :invited_event_id)
+    params.require(:invitation).permit({ guest_id: [] }, :invited_event_id, :acceptance)
   end
 end
