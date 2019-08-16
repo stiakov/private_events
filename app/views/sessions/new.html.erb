@@ -1,0 +1,11 @@
+<% provide(:title, "Login") %>
+
+<%= form_for(:sessions, url: login_path) do |f| %>
+<%# <%= render 'shared/errors', object: f.object %>
+  <div class="form-group ml-4 mr-4">
+    <%= f.label :email %>:
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Login', class:'ml-4 mr-4 btn btn-primary' %>
+<% end %>

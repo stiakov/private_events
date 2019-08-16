@@ -1,24 +1,12 @@
-# README
+# Private Events
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Website based in Eventbrite to practice Rails associations.
 
-Things you may want to cover:
+Built with Rails 5. Powered with black coffee.
 
-* Ruby version
+## Developers Team
 
-* System dependencies
+- [Santiago Torres](https://github.com/stiakov)
+- [Elizabeth Villalejos](https://github.com/misselliev/)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+"Looking at code you wrote more than two weeks ago is like looking at code you are seeing for the first time." Dan Hurvitz

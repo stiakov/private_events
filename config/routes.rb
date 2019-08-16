@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'sessions#home'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
+  resources :users, only: %i[new create show]
+  get 'index', to: 'users#index'
+
+  resources :events, only: %i[new create index]
+  match '/events/show/:id', to: 'events#show', via: :get, as: :events_show
+
+  post 'attendances/create'
+  delete 'attendances/destroy'
+
+  get 'invitations/new'
+  get 'invite', to: 'invitations#new'
+  post 'invite/create', to: 'invitations#create'
 end

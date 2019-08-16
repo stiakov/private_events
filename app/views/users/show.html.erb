@@ -1,0 +1,111 @@
+<% provide(:title, "User Profile") %>
+<div class="ml-3 mb-0">
+  <h3><%= @user.name %></h3>
+  <small><%= @user.email %></small>
+</div>
+
+<% if !@user_pending_inv.empty? %>
+  <div class="card mt-3 mb-3 ml-3 mr-3">
+    <h4 class="card-header">Pending invitations:</h4>
+    <% @user_pending_inv.each do |event| %>
+      <div class="card-body d-flex flex-row justify-content-between">
+      <span>
+        <ul>
+        <% item = event.invited_event%>
+          <li><%= link_to "#{item.title}", events_show_path(id: item.id) %>
+            <% if item.creator_id == @current_user.id %>
+              <span class="text-danger font-weight-bold">*</span>
+            <% else %>
+              <br>
+              <span class="text-success">Hosted by: <%= item.creator.name %></span>
+            <% end %>
+          </li>
+          <% date_hour = item.date_event.to_s.split(' ') %>
+          <small class="text-info font-weight-bold">
+              <%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %>
+            <span class="text-capitalize text-secondary font-weight-light">
+              / <%= time_ago_in_words(item.date_event) %> hence
+            </span>
+          </small>
+        </ul>
+      </span>
+        <% if item.date_event.to_date == Time.current.to_date %>
+          <span class="text-danger font-weight-bold">TODAY</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center">You have no invitations right now</p>
+<% end %>
+
+<div class="card mb-3 mt-3 ml-3 mr-3">
+  <h4 class="card-header d-flex justify-content-between">Events that I'm attending:
+    <small class="text-danger">Events marked with * are owned by you</small>
+  </h4>
+  <% @user_upcoming_attendances.each do |event| %>
+    <div class="card-body d-flex flex-row justify-content-between">
+      <span>
+        <ul>
+          <li><%= link_to "#{event.title}", events_show_path(id: event.id) %>
+            <% if event.creator_id == @current_user.id %>
+              <span class="text-danger font-weight-bold">*</span>
+            <% else %>
+              <br>
+              <span class="text-success">Hosted by: <%= event.creator.name %></span>
+            <% end %>
+          </li>
+          <% date_hour = event.date_event.to_s.split(' ') %>
+          <small class="text-info font-weight-bold">
+            <%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %>
+            <span class="text-capitalize text-secondary font-weight-light">
+              / <%= time_ago_in_words(event.date_event) %>
+              <% if event.date_event > Time.current %>
+                hence
+              <% else %>
+                ago
+              <% end %>
+            </span>
+          </small>
+        </ul>
+      </span>
+      <% if event.date_event.to_date == Time.current.to_date %>
+        <span class="text-danger font-weight-bold">TODAY</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="card mb-3 ml-3 mr-3 mt-3">
+  <h4 class="card-header">My Attended Events:</h4>
+  <% if @user_past_attendances.empty? %>
+    <p class="text-center">You have no past events</p>
+  <% else %>
+    <% @user_past_attendances.each do |event| %>
+      <div class="card-body d-flex flex-row justify-content-between">
+      <span>
+        <ul>
+          <li><%= link_to "#{event.title}", events_show_path(id: event.id) %>
+            <% if event.creator_id == @current_user.id %>
+              <span class="text-danger font-weight-bold">*</span>
+            <% else %>
+              <br>
+              <span class="text-success">Hosted by: <%= event.creator.name %></span>
+            <% end %>
+          </li>
+          <% date_hour = event.date_event.to_s.split(' ') %>
+          <small class="text-info font-weight-bold">
+              <%= "#{date_hour[0]} – #{date_hour[1][0..4]}" %>
+            <span class="text-capitalize text-secondary font-weight-light">
+              / <%= time_ago_in_words(event.date_event) %> ago
+            </span>
+          </small>
+        </ul>
+      </span>
+        <% if event.date_event.to_date == Time.current.to_date %>
+          <span class="text-danger font-weight-bold">TODAY</span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
