@@ -2,7 +2,9 @@
 <div class="card mb-3 ml-3 mr-3">
   <ul>
     <% @users.each do |i|%>
-      <li><%= i.name %></li>
+      <li><%= i.name %> –
+      <small><%= i.email %></small>
+      </li>
     <%end%>
   </ul>
 </div>
