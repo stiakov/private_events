@@ -2,7 +2,12 @@
 
 Website based in Eventbrite to practice Rails associations.
 
-Built with Rails 5. Powered with black coffee.
+Built with Rails 5. Powered by black coffee.
+
+## Live version
+
+You can checkout our live version [here](https://pure-thicket-29255.herokuapp.com/)
+
 
 ## Developers Team
 
